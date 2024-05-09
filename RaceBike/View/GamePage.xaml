@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RaceBike.View.GamePage"
+             Title="RaceBike 2000">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="FieldStyle" TargetType="Rectangle">
+                <Setter Property="Stroke" Value="Black"/>
+                <Setter Property="StrokeThickness" Value="1"/>
+
+                <Style.Triggers>
+                    <DataTrigger TargetType="Rectangle" Binding="{Binding Field}" Value="Empty">
+                        <Setter Property="Fill" Value="LightGray" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Rectangle" Binding="{Binding Field}" Value="Fuel">
+                        <Setter Property="Fill" Value="Maroon" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Rectangle" Binding="{Binding Field}" Value="Bike">
+                        <Setter Property="Fill" Value="RoyalBlue" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout
+        Spacing="3"
+        Margin="3">
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label 
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Padding="5, 5, 5, 5"
+                VerticalOptions="Start"
+                Text="{Binding LatestBestTime}"/>
+
+            <Label 
+                Grid.Column="0" 
+                Grid.Row="1" 
+                Padding="5, 5, 5, 5"
+                VerticalOptions="Start"
+                Text="{Binding CurrentTime}"/>
+
+            <Label
+                Grid.Column="1"
+                Grid.Row="0"
+                Padding="5, 5, 5, 5"
+                HorizontalOptions="End"
+                Text="{Binding CurrentTankLevel}"/>
+
+            <Label 
+                Grid.Column="1" 
+                Grid.Row="1" 
+                Padding="5, 5, 5, 5"
+                HorizontalOptions="End"
+                Text="{Binding CurrentSpeed}"/>
+
+        </Grid>
+
+
+        <Grid 
+            BindableLayout.ItemsSource="{Binding Coordinates}" 
+            VerticalOptions="FillAndExpand"
+            RowDefinitions="{Binding RowDefinitions}" 
+            ColumnDefinitions="{Binding ColumnDefinitions}" 
+            Grid.Row="1">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle 
+                        Style="{StaticResource FieldStyle}"
+                        Grid.Row="{Binding Y}" Grid.Column="{Binding X}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </Grid>
+
+        <Grid
+            RowSpacing="3"
+            VerticalOptions="End">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button
+                Grid.Column="0" 
+                Grid.Row="0" 
+                Text="Slow down"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Command="{Binding KeyCommand_SlowDown}"/>
+
+            <Button
+                Grid.Column="1" 
+                Grid.Row="0" 
+                Text="Speed up"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                Command="{Binding KeyCommand_SpeedUp}"/>
+
+            <Button
+                Grid.Column="0" 
+                Grid.Row="1" 
+                Text="Left"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Command="{Binding KeyCommand_MoveLeft}"/>
+
+            <Button
+                Grid.Column="1" 
+                Grid.Row="1" 
+                Text="Right"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                Command="{Binding KeyCommand_MoveRight}"/>
+
+        </Grid>
+
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RaceBike.View.MainPage"
+             Title="Main menu">
+
+    <ContentPage.Content>
+        <StackLayout 
+            Spacing="3"
+            Margin="3">
+            <Label 
+                x:Name="titleLabel" 
+                HorizontalOptions="Center" 
+                VerticalOptions="CenterAndExpand"
+                FontAttributes="Bold"
+                FontSize="Title"
+                Text="{Binding TitleText}"/>
+            <Label 
+                x:Name="additionalInfo1Label" 
+                HorizontalOptions="Center"
+                FontSize="Small"
+                Text="{Binding Description01Text}"/>
+            <Label 
+                x:Name="additionalInfo2Label" 
+                HorizontalOptions="Center" 
+                FontSize="Small"
+                Text="{Binding Description02Text}"/>
+            <Button 
+                x:Name="newResumeButton" 
+                Padding="3" 
+                Text="{Binding NewResumeText}" 
+                Command="{Binding ButtonCommand_NewResume}"
+                VerticalOptions="EndAndExpand"/>
+            <Button 
+                x:Name="loadButton" 
+                Text="Load" 
+                Padding="3" 
+                Command="{Binding ButtonCommand_Load}"/>
+            <Button 
+                x:Name="saveButton" 
+                Text="Save" 
+                Padding="3" 
+                Command="{Binding ButtonCommand_Save}" 
+                IsEnabled="{Binding IsSaveEnabled}"/>
+            <Button 
+                x:Name="helpButton" 
+                Text="Help" 
+                Padding="3" 
+                Command="{Binding ButtonCommand_Help}"/>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
